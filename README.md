@@ -44,7 +44,7 @@ The following example URL defines an Item ID:
 arcgis-explorer://?id=2adf08a4a1a84834a773805a6e86f69e
 ```
 
-**NOTE:** All other paramters require that a item id be specified.
+**NOTE:** All other paramaters require that a item id be specified.
 
 ####Specify a custom center
 

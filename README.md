@@ -48,7 +48,7 @@ arcgis-explorer://?id=2adf08a4a1a84834a773805a6e86f69e
 
 ####Specify a custom center
 
-Use this to specify a starting point different than the user’s current location:
+Use this to recenter the map once loaded to a different coordinate than the user’s current location:
 
 `center`: Sets where the center of the map display should be.
 

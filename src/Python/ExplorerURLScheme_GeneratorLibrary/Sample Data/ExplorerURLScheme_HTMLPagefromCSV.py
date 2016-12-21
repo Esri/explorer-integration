@@ -28,4 +28,5 @@ hyperlinkObject = ExplorerURLHyperlinks()
 fileLocation = './applink_testcases.csv'
 csvLists = hyperlinkObject.csv2Lists(fileLocation, delimiter=",")  # change the 'csv2Lists()' indices in library if different than example csv
 htmlPageTitle = "Explorer"
-hyperlinkObject.generateHTMLpage(csvLists, htmlPageTitle)
+# hyperlinkObject.generateHTMLpage(csvLists, htmlPageTitle)
+hyperlinkObject.generateStyledHTMLpage(csvLists, htmlPageTitle, styleFile="./styles/popup.css", includeQR=True, imageDirectory='./qrcodes/')

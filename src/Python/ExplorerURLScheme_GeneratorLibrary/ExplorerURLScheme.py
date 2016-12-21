@@ -83,7 +83,7 @@ class ExplorerURLScheme:
         """
         applicationScheme, parameterString = self._splitStringBuilder(stringBuilder)
         # test applicationScheme is valid
-        if applicationScheme != self.__explorerScheme: raise ValueError("The application scheme is not valid for Navigator")
+        if applicationScheme != self.__explorerScheme: raise ValueError("The application scheme is not valid for Explorer")
         parameters = self._splitParameterString(parameterString)
         if parameters is not None:
             for parameter in parameters:
@@ -178,6 +178,54 @@ class ExplorerURLHyperlinks:
         fp.write("</body></html>")
         fp.close()
         print("HTML page completed")
+
+
+    def generateStyledHTMLpage(self, validURLs, title, styleFile=None, includeQR=False, imageDirectory=None):
+        """
+        generates a html page given
+        :param validURLs: a list of url lists [[urlStr_1, urlTitleStr_1], .... , [urlStr_N, urlTitleStr_N]]
+        :param title: title of html page as string
+        """
+        print("Generating HTML page at location of library...")
+        print("Processing hyperlinks...\n")
+        outfile = "applinksPage_" + str(title) + ".htm"
+        fp = open(outfile, 'w')
+        fp.write(str("<!doctype html public \"-//w3c/dtd html 4.0 Transitional//en\">"
+                     "<html> <head><title>{}: Explorer App Links</title>").format(str(title)))
+        if styleFile: fp.write(str("<link rel=\"stylesheet\" type=\"text/css\" href=\"{}\">").format(styleFile))
+        fp.write(str("</head> <body bgcolor=\"white\"> <h1>{}: Explorer App Links</h1><p><div id=\"thumbwrap\">\n").format(str(title)))
+        count = 1
+        for validURL in validURLs:
+            url = str(validURL[0])
+            urlTitle = str(validURL[1]).replace("/", "").replace(".", "")
+            # html bits
+            urllinkHTMLString = str("<a href=\"{}\">{}. {}</a>").format(url, str(count), urlTitle)  # the hyperlink
+            urltitleHTMLString = str("<a>{}</a><br>\n").format(url)  # the url scheme text
+            # additional indices if used
+            validURLcomments, validURLcomments2 = "", ""
+            if len(validURL) > 2:
+                comments1 = validURL[2]
+                comments2 = validURL[3]
+                if validURL[2] is not "": validURLcomments = str("<a>\t({})</a><br>").format(comments1)  # the PASS/FAIL info
+                if validURL[3] is not "": validURLcomments2 = str("<b>{}</b><br>").format(comments2)  # the test group info
+            if includeQR:
+                try:
+                    ExplorerURLQRCode().saveQRCodePNG(url, urlTitle, imageDirectory)
+                except:
+                    print("skipping code, too big.....")
+                qrcodeHTML = "<a class=\"thumb\" href=\"#\"><img src=\"./qrcodes/sample.png\" style=\"height: 20px; width: 20px;\" " \
+                             "alt=\"QR Popup\"><span> <img src=\"./qrcodes/{}.png\" alt=\"{}\"></span></a><br><br>".format(urlTitle, url)
+            if validURLcomments2 is not "": fp.write(validURLcomments2)
+            fp.write(urllinkHTMLString)
+            if validURLcomments is not "": fp.write(validURLcomments)
+            else: fp.write("<br>")
+            fp.write(urltitleHTMLString)
+            if includeQR: fp.write(qrcodeHTML)
+            count += 1
+        fp.write("</div></body></html>")
+        fp.close()
+        print("HTML page completed")
+
 
     def csv2Lists(self, csvLocation, delimiter=','):
         """

@@ -18,30 +18,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 '''EXAMPLE OF HOW TO CALL -- THIS WOULD ALL BE OUTSIDE LIBRARY'''
 '''import library'''
 # if library is inside folder as your script you can use:
-# import NavigatorURLScheme
+# import ExplorerURLScheme
 # or explicitly point to folders with dot notation
 from src.Python.ExplorerURLScheme_GeneratorLibrary.ExplorerURLScheme import ExplorerURLScheme, ExplorerURLQRCode
 '''1) Specify if you want to generate or use explicit url'''
-generateURL = False
+GENERATEURL = False
 
 '''2a) Example variables for building url -- USE THIS INFO IF YOU WANT TO GENERATE A HTML PAGE USING LIBRARY GENERATED URL'''
-start = ['43.633332,-70.259971', 'My house']  # <-- use list (name item is optional)
-stops = [['43.681959,-70.092359', 'Jewell Island']]  # <-- use list of lists (name item is optional)
-optimize = "false"  # <-- use string
-travelmode = "driving time"  # <-- use string
-navigate = "false"  # <-- use string
-callback = ["my-cool-app://", "My Cool App"]  # <-- use list
-# dictionary of variables -- parameters are optional by deleting key/value
-parameterDictionary = {'start': start, 'stops': stops}
+itemID = '2adf08a4a1a84834a773805a6e86f69e'
+center = '43.656789,-70.278083'
+scale = '12000'
+parameterDictionary = {'itemID': itemID, 'center': center, 'scale': scale}
 
 '''2b) Example string for explicit url -- USE THIS INFO IF YOU WANT TO GENERATE A HTML PAGE USING EXPLICIT URL'''
-explicitURL = 'arcgis-navigator://?start=100+Commercial+St+Portland+ME&startname=Esri&stop=43.633332,-70.259971&stopname=My+House'
-title = "simple_startThenStop"
+explicitURL = 'arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=12000'
+title = "simple_openMap"
 
 '''3) Call to libraries -- Generate single link pages from data above'''
-navigatorURLObject = ExplorerURLScheme(parameterDictionary)  # create NavigatorURLScheme object and generateURL
-navigatorURL = navigatorURLObject.generateURL() if generateURL == True else explicitURL   # based on above setting, build or use explicit url
-ExplorerURLQRCode().returnQRCodeText(navigatorURL)
-ExplorerURLQRCode().saveQRCodeSVG(navigatorURL, title)
-ExplorerURLQRCode().saveQRCodePNG(navigatorURL, title)
+if GENERATEURL:
+    explorerURLObject = ExplorerURLScheme(parameterDictionary)  # create ExplorerURLScheme object and generateURL
+    outputURL = explorerURLObject.generateURL()  # based on above setting, build or use explicit url
+else: outputURL = explicitURL
+
+ExplorerURLQRCode().returnQRCodeText(outputURL)
+ExplorerURLQRCode().saveQRCodeSVG(outputURL, title)
+ExplorerURLQRCode().saveQRCodePNG(outputURL, title)
 

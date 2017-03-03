@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 '''EXAMPLE OF HOW TO CALL -- THIS WOULD ALL BE OUTSIDE LIBRARY'''
 '''import library'''
 # if library is inside folder as your script you can use:
-# import NavigatorURLScheme
+# import ExplorerURLScheme
 # or explicitly point to folders with dot notation
 from src.Python.ExplorerURLScheme_GeneratorLibrary.ExplorerURLScheme import ExplorerURLScheme, ExplorerURLHyperlinks
 
 '''1) Call to libraries -- Generate multiple link pages from explicit list of links'''
 # define list of link lists and generate html page
 hyperlinkObject = ExplorerURLHyperlinks()
-explicitURLs = (('arcgis-explorer://?id=2adf08a4a1a84834a773805a6e86f69e', 'link1'),
-                ('arcgis-explorer://?id=2adf08a4a1a84834a773805a6e86f69e', 'link2'),
-                ('arcgis-explorer://?id=2adf08a4a1a84834a773805a6e86f69e', 'link3'),)
+explicitURLs = (('arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e', 'link1'),
+                ('arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e', 'link2'),
+                ('arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e', 'link3'),)
 htmlPageTitle = "ExplicitListOfURLs"
 hyperlinkObject.generateHTMLpage(explicitURLs, htmlPageTitle)

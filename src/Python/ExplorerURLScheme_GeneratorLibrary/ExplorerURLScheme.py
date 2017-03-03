@@ -32,7 +32,7 @@ class ExplorerURLScheme:
     """
     # global variables
     __explorerScheme = "arcgis-explorer://"
-    __validParameters = ["id", "center", "scale", "rotation"]
+    __validParameters = ["itemID", "center", "scale", "rotation"]
     __invalidStringCharacters = [" ", "&"]
     __parameterCount = 0  # counter for how many parameters have been passed to stringBuilder
 
@@ -42,7 +42,7 @@ class ExplorerURLScheme:
         :param parameterDictionary: the dictionary of key/value pairs to be used when building url
         """
         self.__parameterDictionary = parameterDictionary
-        self.__id = self.__parameterDictionary.get("id", None)
+        self.__id = self.__parameterDictionary.get("itemID", None)
         self.__center = self.__parameterDictionary.get("center", None)
         self.__scale = self.__parameterDictionary.get("scale", None)
         self.__rotation = self.__parameterDictionary.get("rotation", None)

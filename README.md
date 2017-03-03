@@ -103,14 +103,11 @@ If an error is encountered when processing a URL scheme, the user will receive a
 
 ## Sample code
 
-* [Swift (iOS)](https://github.com/Esri/explorer-integration/tree/master/src/Swift)
-* [Java (Android)](https://github.com/Esri/explorer-integration/tree/master/src/Android)
 * [Python](https://github.com/Esri/explorer-integration/tree/master/src/Python)
 
 ## Resources and related repositories
 
 * [Explorer for ArcGIS documentation](http://doc.arcgis.com/en/explorer/)
-* [Collector for ArcGIS integration repository](http://developers.arcgis.com)
 
 Not Esri's doc but still pretty dang useful :-)
 

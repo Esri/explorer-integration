@@ -9,7 +9,7 @@ This is a multi-language repository that contains documentation and sample code 
 ## What's included
 
 * [Documentation](#documentation) on the URL scheme structure
-* [Sample code](#sample) for iOS (Swift), Android (Java), and Python
+* [Sample code](#sample) for Python
 
 ## Get started
 

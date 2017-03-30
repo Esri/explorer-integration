@@ -36,7 +36,7 @@ The rest of this topic describes the various parameters Explorer currently suppo
 
 This is one of the simplest schemes that can be used. It requests the Item ID and attempts to open the map using the map’s default center and scale.
 
-`itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device.
+`itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device. It is important to note that if the item is publically shared in ArcGIS Online the user tapping on the URL scheme does not need to be signed into Explorer in order to access the map.
 
 The following example URL defines an Item ID:
 

@@ -18,11 +18,11 @@ Read the following documentation and clone down the appropriate language into yo
 
 ## Documentation
 
-####What is the Explorer for ArcGIS URL scheme?
+#### What is the Explorer for ArcGIS URL scheme?
 
 A URL scheme allows you to launch a native app from another app, website, or email. You can set options in the URL that will be passed to the app you want to open, causing it to perform specific functions, such as searching for opening a map to a specific centered location and scale. This capability is available on Explorer for ArcGIS in the iOS Beta version.
 
-####Basic URL scheme structure
+#### Basic URL scheme structure
 
 All Explorer URL schemes start with the identifier `arcgis-explorer` and can contain additional parameters that follow the form:
 
@@ -32,7 +32,7 @@ arcgis-explorer://?parameter=value&parameter=value
 
 The rest of this topic describes the various parameters Explorer currently supports.
 
-####Open a specific Web Map or Mobile Map Package
+#### Open a specific Web Map or Mobile Map Package
 
 This is one of the simplest schemes that can be used. It requests the Item ID and attempts to open the map using the map’s default center and scale.
 
@@ -46,7 +46,7 @@ arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e
 
 **NOTE:** All other parameters require that a item id be specified.
 
-####Specify a custom center
+#### Specify a custom center
 
 Use this to recenter the map once loaded to a different coordinate than the user’s current location:
 
@@ -72,7 +72,7 @@ The following example URL displays a Public Web Map centered on a place of inter
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME
 ```
 
-####Specify a custom scale
+#### Specify a custom scale
 
 Explorer can also open the map to a custom scale. 
 
@@ -84,7 +84,7 @@ The following example URL displays a Public Web Map at a custom scale:
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&scale=12000
 ```
 
-####Specify a custom rotation
+#### Specify a custom rotation
 
 Explorer can also open the map to a custom rotation. 
 
@@ -97,7 +97,7 @@ arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&rotation=90
 ```
 
 
-####Errors
+#### Errors
 If an error is encountered when processing a URL scheme, the user will receive an alert.
 <a name="sample"></a>
 

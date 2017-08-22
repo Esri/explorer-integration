@@ -38,64 +38,58 @@ This is one of the simplest schemes that can be used. It requests the Item ID an
 
 `itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device. It is important to note that if the item is publically shared in ArcGIS Online the user tapping on the URL scheme does not need to be signed into Explorer in order to access the map.
 
-The following example URL defines an Item ID:
+The following example URL defines an Item ID to a Public Web Map:
 
 ```
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e
 ```
 
+The following example URL defines an Item ID to a Public Mobile Map Package:
+
+```
+arcgis-explorer://?itemID=e3767862254a4719982faaa0eef5e63d
+```
+
 **NOTE:** All other parameters require that a item id be specified.
 
-#### Specify a custom center
+#### Specify a custom center and scale
 
-Use this to recenter the map once loaded to a different coordinate than the user’s current location:
+Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter includes either a set of latitude and longitude coordinates (decimal degrees), or a query formatted address. When specifying a `center`, a `scale` must also be provided.
 
 `center`: Sets where the center of the map display should be.
 
-The `center` parameter includes either a set of latitude and longitude coordinates (decimal degrees), or a query formatted address.
+`scale`: Sets the scale in map units that the map should be rendered.
+
 
 The following example URL displays a Public Web Map centered on a coordinate pair:
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083
+arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=90000
 ```
 
 The following example URL displays a Public Web Map centered on an address:
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=271+Park+Ave,+Portland+ME
+arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=271+Park+Ave,+Portland+ME&scale=90000
 ```
 
 The following example URL displays a Public Web Map centered on a place of interest:
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME
-```
-
-#### Specify a custom scale
-
-Explorer can also open the map to a custom scale. 
-
-`scale`: Sets the scale in map units that the map should be rendered. 
-
-The following example URL displays a Public Web Map at a custom scale:
-
-```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&scale=12000
+arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME&scale=15000
 ```
 
 #### Specify a custom rotation
 
-Explorer can also open the map to a custom rotation. 
+Optionally, Explorer can also open the map to a custom rotation. When specifying a `rotation`, a `center` and `scale` must also be provided.
 
 `rotation`: Sets the rotation in degrees that the map should be rendered. Acceptable values range from 0 - 360.
 
-The following example URL displays a Public Web Map at a custom rotation:
+The following example URL displays a Public Web Map centered on a coordinate pair with a rotation applied to the map:
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&rotation=90
+arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=90000&rotation=180
 ```
-
 
 #### Errors
 If an error is encountered when processing a URL scheme, the user will receive an alert.

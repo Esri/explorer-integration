@@ -4,8 +4,8 @@ This is a multi-language repository that contains documentation and sample code 
 
 ## Supported versions
 
-* **iOS** Explorer for ArcGIS 17.1.0 +
-* **Android** Explorer for ArcGIS 17.1.0 Beta
+* **iOS:** Explorer for ArcGIS 17.1.0 +
+* **Android:** Explorer for ArcGIS 17.1.0 Beta
 
 ## What's included
 

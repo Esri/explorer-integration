@@ -23,7 +23,7 @@ Read the following documentation and clone down the appropriate language into yo
 
 A URL scheme allows you to launch a native app from another app, website, or email. You can set options in the URL that will be passed to the app you want to open, causing it to perform specific functions, such as opening a map to a specific location and scale. This capability is available on Explorer for ArcGIS for iOS and Android.
 
-#### Basic URL scheme structure
+#### Explorer URL scheme overview
 
 All Explorer URL schemes start with the identifier `arcgis-explorer` and can contain additional parameters that follow the form:
 
@@ -31,15 +31,27 @@ All Explorer URL schemes start with the identifier `arcgis-explorer` and can con
 arcgis-explorer://?parameter=value&parameter=value
 `
 
-The rest of this topic describes how to use the various parameters Explorer currently supports.
+The following parameter tree is meant to be used as a quick reference to show how the parameters can be used together.
+
+```
+itemID
+│  
+└─── center & scale (used together)
+│   +─── wkid
+│   +─── markup
+│   +─── rotation
+│   
+└─── search
+│  
+└─── bookmark 
+```
+
+The rest of this topic describes the various parameters Explorer currently supports.
 * [`itemID`](#itemid)
-* `center`
-* `wkid`
-* `scale`
-* `rotation`
+* [`center`, `scale`](#center-scale)
+  * [`wkid`, `rotation`, `markup`](wkid-rotation-markup)
 * `search`
 * `bookmark`
-* `markup` 
 
 
 #### Open a specific Web Map or Mobile Map Package 
@@ -58,41 +70,37 @@ arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e
 The following example URL defines an Item ID to a Public Mobile Map Package:
 
 ```
-arcgis-explorer://?itemID=e3767862254a4719982faaa0eef5e63d
+arcgis-explorer://?itemID=6ca5f9cfea0c47b2969ee9750693301f
 ```
 
 **NOTE:** All other parameters require that a item id be specified.
 
-#### Change intial extent for the map
+#### Change initial extent for the map
 
-There are a couple ways to set the map extent to provide a custom map viewing experience. One way is to specify the `center`/`scale` and optionally providing `wkid` and/or `rotation`. Alternatively, you can specify a `bookmark` from the map. In 
+There are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` & `scale` (optionally providing `wkid`, `rotation`, and/or `markup` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
 
 ##### `center`, `scale`
 
 Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter includes either a set of latitude and longitude coordinates (decimal degrees), or a query formatted address. When specifying a `center`, a `scale` must also be provided.
 
-`center`: Sets where the center of the map display should be.
+- `center`: Provide center in the following formats:
+  - Comma-seperated latitude/longitude (y/x) pair in WGS84 (WKID:4326)
+  - Address (plus-encode spaces) to be reverse geocoded by organization geocoder (Mobile Map Package's with locators will not look to geocoder)
+  - Feature search result (plus-encode spaces)
+- `scale`: Sets the scale in map units that the map should be rendered.
 
-`scale`: Sets the scale in map units that the map should be rendered.
 
-
-The following example URL displays a Public Web Map centered on a coordinate pair:
+The following example URL's display a Public Web Map centered on a coordinate pair, address, and feature respectively:
 
 ```
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=90000
-```
-
-The following example URL displays a Public Web Map centered on an address:
-
-```
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=271+Park+Ave,+Portland+ME&scale=90000
-```
-
-The following example URL displays a Public Web Map centered on a place of interest:
-
-```
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME&scale=15000
 ```
+
+##### `wkid`, `rotation`, `markup`
+
+
 
 #### Specify a custom rotation
 

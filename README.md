@@ -4,7 +4,7 @@ This is a multi-language repository that contains documentation and sample code 
 
 ## Supported versions
 
-* **iOS:** Explorer for ArcGIS 17.1.0 +
+* **iOS:** Explorer for ArcGIS 18.1.0
 * **Android:** Explorer for ArcGIS 17.1.0 Beta
 
 ## What's included
@@ -21,7 +21,7 @@ Read the following documentation and clone down the appropriate language into yo
 
 #### What is the Explorer for ArcGIS URL scheme?
 
-A URL scheme allows you to launch a native app from another app, website, or email. You can set options in the URL that will be passed to the app you want to open, causing it to perform specific functions, such as searching for opening a map to a specific centered location and scale. This capability is available on Explorer for ArcGIS in the iOS Beta version.
+A URL scheme allows you to launch a native app from another app, website, or email. You can set options in the URL that will be passed to the app you want to open, causing it to perform specific functions, such as opening a map to a specific location and scale. This capability is available on Explorer for ArcGIS for iOS and Android.
 
 #### Basic URL scheme structure
 
@@ -31,9 +31,19 @@ All Explorer URL schemes start with the identifier `arcgis-explorer` and can con
 arcgis-explorer://?parameter=value&parameter=value
 `
 
-The rest of this topic describes the various parameters Explorer currently supports.
+The rest of this topic describes how to use the various parameters Explorer currently supports.
+* [`itemID`](#itemid)
+* `center`
+* `wkid`
+* `scale`
+* `rotation`
+* `search`
+* `bookmark`
+* `markup` 
 
-#### Open a specific Web Map or Mobile Map Package
+
+#### Open a specific Web Map or Mobile Map Package 
+##### `itemID`
 
 This is one of the simplest schemes that can be used. It requests the Item ID and attempts to open the map using the map’s default center and scale.
 
@@ -53,7 +63,11 @@ arcgis-explorer://?itemID=e3767862254a4719982faaa0eef5e63d
 
 **NOTE:** All other parameters require that a item id be specified.
 
-#### Specify a custom center and scale
+#### Change intial extent for the map
+
+There are a couple ways to set the map extent to provide a custom map viewing experience. One way is to specify the `center`/`scale` and optionally providing `wkid` and/or `rotation`. Alternatively, you can specify a `bookmark` from the map. In 
+
+##### `center`, `scale`
 
 Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter includes either a set of latitude and longitude coordinates (decimal degrees), or a query formatted address. When specifying a `center`, a `scale` must also be provided.
 

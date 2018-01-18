@@ -31,27 +31,17 @@ All Explorer URL schemes start with the identifier `arcgis-explorer` and can con
 arcgis-explorer://?parameter=value&parameter=value
 `
 
-The following parameter tree is meant to be used as a quick reference to show how the parameters can be used together.
+The following diagram is meant to be used as a quick reference to show how the parameters can be used together. The rest of this topic describes the various parameters in detail.
 
-```
-itemID
-│  
-└─── center & scale (used together)
-│   +─── wkid
-│   +─── markup
-│   +─── rotation
-│   
-└─── search
-│  
-└─── bookmark 
-```
 
-The rest of this topic describes the various parameters Explorer currently supports.
+![image](https://devtopia.esri.com/storage/user/1320/files/b469df44-fade-11e7-8d2b-e2854b9cd241)
+
+
 * [`itemID`](#itemid)
 * [`center`, `scale`](#center-scale)
-  * [`wkid`, `rotation`, `markup`](wkid-rotation-markup)
-* `search`
-* `bookmark`
+  * [`wkid`, `rotation`, `markup`](#wkid-rotation-markup)
+* [`bookmark`](#bookmark)
+* [`search`](#search)
 
 
 #### Open a specific Web Map or Mobile Map Package 
@@ -77,13 +67,13 @@ arcgis-explorer://?itemID=6ca5f9cfea0c47b2969ee9750693301f
 
 #### Change initial extent for the map
 
-There are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` & `scale` (optionally providing `wkid`, `rotation`, and/or `markup` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
+There are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` and `scale` (optionally providing `wkid`, `rotation`, and/or `markup` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
 
 ##### `center`, `scale`
 
-Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter includes either a set of latitude and longitude coordinates (decimal degrees), or a query formatted address. When specifying a `center`, a `scale` must also be provided.
+Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter can include either a set of latitude and longitude coordinates (decimal degrees), a query formatted address, or feature search result. When specifying a `center`, a `scale` must also be provided.
 
-- `center`: Provide center in the following formats:
+- `center`: Centers the map to a certain location. Provide center in the following formats:
   - Comma-seperated latitude/longitude (y/x) pair in WGS84 (WKID:4326)
   - Address (plus-encode spaces) to be reverse geocoded by organization geocoder (Mobile Map Package's with locators will not look to geocoder)
   - Feature search result (plus-encode spaces)
@@ -100,19 +90,23 @@ arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,
 
 ##### `wkid`, `rotation`, `markup`
 
+In addition to providing a `center` and `scale`, you can optionally specify any combination of the `wkid`, `rotation`, and `markup` parameters. When using these parameters, you must also provide a `center` and a `scale`.
+- `wkid`: Provide `center` in a different spatial reference. Defaults to WKID: 4326 (WGS84) if nothing provided.
+- `rotation`: Rotate the given map 0-360 degrees. Sets the rotation in degrees that the map should be rendered. Acceptable values range from 0 - 360.
+- `markup`: Enable markup mode when opening a map.
 
-
-#### Specify a custom rotation
-
-Optionally, Explorer can also open the map to a custom rotation. When specifying a `rotation`, a `center` and `scale` must also be provided.
-
-`rotation`: Sets the rotation in degrees that the map should be rendered. Acceptable values range from 0 - 360.
-
-The following example URL displays a Public Web Map centered on a coordinate pair with a rotation applied to the map:
-
+The following example URL's show how these parameters can be used together to further customize the map viewing experience.
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=90000&rotation=180
+arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=43.649982,-70.29185&scale=2000&rotation=180
+arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=4833809.06,395819.70&scale=2000&wkid=26919&rotation=180
+arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=4833809.06,395819.70&scale=2000&wkid=26919&rotation=180&markup=true
 ```
+
+##### `bookmark`
+
+
+##### `search`
+
 
 #### Errors
 If an error is encountered when processing a URL scheme, the user will receive an alert.

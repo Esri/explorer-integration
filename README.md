@@ -34,7 +34,7 @@ arcgis-explorer://?parameter=value&parameter=value
 The following diagram is meant to be used as a quick reference to show how the parameters can be used together. The rest of this topic describes the various parameters in detail.
 
 
-![image](https://devtopia.esri.com/storage/user/1320/files/b469df44-fade-11e7-8d2b-e2854b9cd241)
+![image](https://user-images.githubusercontent.com/10168933/35123619-04d582a6-fc71-11e7-8e8b-6e9ec331023f.png)
 
 
 * [`itemID`](#itemid)

@@ -34,12 +34,12 @@ arcgis-explorer://?parameter=value&parameter=value
 The following diagram is meant to be used as a quick reference to show how the parameters can be used together. The rest of this topic describes the various parameters in detail.
 
 
-![image](https://user-images.githubusercontent.com/10168933/35123619-04d582a6-fc71-11e7-8e8b-6e9ec331023f.png)
+![image](https://user-images.githubusercontent.com/10168933/35164182-6bd47830-fd17-11e7-8822-e97108fc1775.png)
 
 
 * [`itemID`](#itemid)
 * [`center`, `scale`](#center-scale)
-  * [`wkid`, `rotation`, `markup`](#wkid-rotation-markup)
+  * [`wkid`, `rotation`, `markup`, `dropPin`](#wkid-rotation-markup-dropPin)
 * [`bookmark`](#bookmark)
 * [`search`](#search)
 
@@ -51,19 +51,14 @@ This is one of the simplest schemes that can be used. It requests the Item ID an
 
 `itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device. It is important to note that if the item is publically shared in ArcGIS Online the user tapping on the URL scheme does not need to be signed into Explorer in order to access the map.
 
-The following example URL defines an Item ID to a Public Web Map:
+The following example URL's defines an Item ID to a Public Web Map and a Public Mobile Map Package respectively:
 
 ```
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e
-```
-
-The following example URL defines an Item ID to a Public Mobile Map Package:
-
-```
 arcgis-explorer://?itemID=6ca5f9cfea0c47b2969ee9750693301f
+
 ```
 
-**NOTE:** All other parameters require that a item id be specified.
 
 #### Change initial extent for the map
 
@@ -88,9 +83,9 @@ arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=271+Park+Ave,+
 arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME&scale=15000
 ```
 
-##### `wkid`, `rotation`, `markup`
+##### `wkid`, `rotation`, `markup`, `dropPin`
 
-In addition to providing a `center` and `scale`, you can optionally specify any combination of the `wkid`, `rotation`, and `markup` parameters. When using these parameters, you must also provide a `center` and a `scale`.
+In addition to providing a `center` and `scale`, you can optionally specify any combination of the `wkid`, `rotation`, `markup`, or `dropPin` parameters. Note, when using these parameters, a `center` and `scale` is required.
 - `wkid`: Provide `center` in a different spatial reference. Defaults to WKID: 4326 (WGS84) if nothing provided.
 - `rotation`: Rotate the given map 0-360 degrees. Sets the rotation in degrees that the map should be rendered. Acceptable values range from 0 - 360.
 - `markup`: Enable markup mode when opening a map.

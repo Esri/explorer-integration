@@ -44,7 +44,7 @@ The following diagram is meant to be used as a quick reference to show how the p
 * [`search`](#search)
 
 
-#### Open a specific Web Map or Mobile Map Package 
+#### Using URL scheme to customize map viewing experience
 ##### `itemID`
 
 This is one of the simplest schemes that can be used. It requests the Item ID and attempts to open the map using the map’s default center and scale.
@@ -61,8 +61,6 @@ arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84
 arcgis-explorer://?itemID=6ca5f9cfea0c47b2969ee9750693301f
 
 ```
-
-#### Change initial extent for the map
 
 In addition to opening a map to the default center and scale, there are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` and `scale` (optionally providing `wkid`, `rotation`, `markup`, and/or `dropPin` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
 

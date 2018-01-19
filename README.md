@@ -25,7 +25,7 @@ A URL scheme allows you to launch a native app from another app, website, or ema
 
 #### Explorer URL scheme overview
 
-All Explorer URL schemes start with the identifier `arcgis-explorer` and can contain additional parameters that follow the form:
+All Explorer URL schemes start with the identifier `arcgis-explorer` and can contain additional query parameters that follow the form:
 
 `
 arcgis-explorer://?parameter=value&parameter=value
@@ -39,7 +39,7 @@ The following diagram is meant to be used as a quick reference to show how the p
 
 * [`itemID`](#itemid)
 * [`center`, `scale`](#center-scale)
-  * [`wkid`, `rotation`, `markup`, `dropPin`](#wkid-rotation-markup-dropPin)
+  * [`wkid`, `rotation`, `markup`, `dropPin`](#wkid-rotation-markup-droppin)
 * [`bookmark`](#bookmark)
 * [`search`](#search)
 
@@ -49,58 +49,102 @@ The following diagram is meant to be used as a quick reference to show how the p
 
 This is one of the simplest schemes that can be used. It requests the Item ID and attempts to open the map using the map’s default center and scale.
 
-`itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device. It is important to note that if the item is publically shared in ArcGIS Online the user tapping on the URL scheme does not need to be signed into Explorer in order to access the map.
+`itemID`: Sets Item ID for the map. The item referenced can be of type Web Map or Mobile Map Package that is shared with the current user. Mobile Map Packages will be automatically downloaded if not already on-device. If the item referenced is shared publically in ArcGIS Online, the user tapping on the URL scheme does not need to be signed in to Explorer in order to access the map.
 
-The following example URL's defines an Item ID to a Public Web Map and a Public Mobile Map Package respectively:
+The following examples show how you can open a specific map from a URL.
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e
+// open a public Web Map
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84
+
+// open a public Mobile Map Package
 arcgis-explorer://?itemID=6ca5f9cfea0c47b2969ee9750693301f
 
 ```
 
-
 #### Change initial extent for the map
 
-There are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` and `scale` (optionally providing `wkid`, `rotation`, and/or `markup` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
+In addition to opening a map to the default center and scale, there are a couple ways to set the map extent to provide a custom map viewing experience. You can specify the `center` and `scale` (optionally providing `wkid`, `rotation`, `markup`, and/or `dropPin` parameters) or specify a `bookmark` from the map . Alternatively, you can `search` within the map to let Explorer determine how the initial extent should be set while also displaying the matching results. 
 
 ##### `center`, `scale`
 
-Use this to recenter the map once loaded to a different coordinate than the user’s current location. The `center` parameter can include either a set of latitude and longitude coordinates (decimal degrees), a query formatted address, or feature search result. When specifying a `center`, a `scale` must also be provided.
+`center` and `scale` are used in conjuction to recenter a map. The `center` parameter can include either a set of latitude and longitude coordinates (decimal degrees), a query formatted address, or feature search result. When specifying a `center`, the `scale` must also be provided. You can include an `itemID` to center within a certain map, or `center` within the user's current map.
 
 - `center`: Centers the map to a certain location. Provide center in the following formats:
   - Comma-seperated latitude/longitude (y/x) pair in WGS84 (WKID:4326)
-  - Address (plus-encode spaces) to be reverse geocoded by organization geocoder (Mobile Map Package's with locators will not look to geocoder)
-  - Feature search result (plus-encode spaces)
+  - Address (plus-encode spaces) to be reverse geocoded by organization geocoder (Mobile Map Package's with locators will not utilize geocoder)
+  - Feature search result (plus-encode spaces). Explorer will automatically center on top result.
 - `scale`: Sets the scale in map units that the map should be rendered.
 
 
-The following example URL's display a Public Web Map centered on a coordinate pair, address, and feature respectively:
+The following examples show how you can use `center` and `scale` to adjust the map view point from a URL.
 
 ```
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=43.656789,-70.278083&scale=90000
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=271+Park+Ave,+Portland+ME&scale=90000
-arcgis-explorer://?itemID=2adf08a4a1a84834a773805a6e86f69e&center=Hadlock+Field,+Portland+ME&scale=15000
+// center within user's current map
+arcgis-explorer://?center=41.780618,-88.179449&scale=9000 
+
+// center on a coordinate pair
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=41.780618,-88.179449&scale=3000
+
+// center on a reverse geocoded address
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=899+Aurora+Ave,+Naperville,+Illinois&scale=1000
+
+// center on a feature from map. In this case, Hydrant #43141
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=43141&scale=500
 ```
 
 ##### `wkid`, `rotation`, `markup`, `dropPin`
 
-In addition to providing a `center` and `scale`, you can optionally specify any combination of the `wkid`, `rotation`, `markup`, or `dropPin` parameters. Note, when using these parameters, a `center` and `scale` is required.
+In addition to providing a `center` and `scale`, you can optionally specify any combination of the `wkid`, `rotation`, `markup`, or `dropPin` parameters. Note, when using any of these parameters, a `center` and `scale` is required.
 - `wkid`: Provide `center` in a different spatial reference. Defaults to WKID: 4326 (WGS84) if nothing provided.
 - `rotation`: Rotate the given map 0-360 degrees. Sets the rotation in degrees that the map should be rendered. Acceptable values range from 0 - 360.
 - `markup`: Enable markup mode when opening a map.
+- `dropPin`: Drop a pin in to highlight area of interest.
 
-The following example URL's show how these parameters can be used together to further customize the map viewing experience.
+The following examples show how the `wkid`, `rotation`, `markup`, and `dropPin` parameters can be used together from a URL.
+
 ```
-arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=43.649982,-70.29185&scale=2000&rotation=180
-arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=4833809.06,395819.70&scale=2000&wkid=26919&rotation=180
-arcgis-explorer://?itemID=413fd05bbd7342f5991d5ec96f4f8b18&center=4833809.06,395819.70&scale=2000&wkid=26919&rotation=180&markup=true
+// rotate the map 180 degrees
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=41.780618,-88.179449&scale=1000&rotation=180
+
+// center on coordinates in NAD83 / UTM zone 19N (WKID: 26919) spatial reference
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=4807094.8078305572,-1096767.7053304175&scale=1000&wkid=26919&rotation=180
+
+// enable markup mode
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=41.780618,-88.179449&scale=1000&rotation=180&markup=true
+
+// drop pin in center of map
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&center=41.780618,-88.179449&scale=1000&rotation=180&dropPin=true
 ```
 
 ##### `bookmark`
 
+Instead of providing a center and scale, the `bookmark` parameter can be used to open the map to a specific viewpoint by specifying a bookmark from the map. When providing a bookmark, you must also provide an `itemID` for the map. You cannon provide any additional parameters besides `itemID` and `bookmark`
+- `bookmark`: Adjusts map viewpoint to the specified bookmark from the map. Bookmark name should be plus-encoded for spaces.
+
+The following example shows how to open a map to a specific bookmark within the map from a URL.
+```
+// rotate the map 180 degrees
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&bookmark=Centennial+Park
+```
+
 
 ##### `search`
+
+The `search` parameter allows you to quickly launch a map and execute a search, returning places and feature results without having to manually type your query in the search tool.
+- `search`: Executes a search, returning places and/or features. Query string should be plus-encoded for spaces.
+
+The following examples show how you can use the search parameter in a URL.
+```
+// search for an address from the geocoder
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=899+Aurora+Ave,+Naperville,+Illinois
+
+// search for a POI from the geocoder
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=Gas+Station
+
+// search for a feature from map. In this case, Hydrant #43141
+arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=43141
+```
 
 
 #### Errors

@@ -130,10 +130,10 @@ The `search` parameter allows you to quickly launch a map and execute a search, 
 The following examples show how you can use the search parameter in a URL.
 ```
 // search for an address from the geocoder
-arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=899+Aurora+Ave,+Naperville,+Illinois
+arcgis-explorer://?itemID=15c3a41bc01e4f8b9922736f3c194c29&search=899+Aurora+Ave,+Naperville,+Illinois
 
 // search for a POI from the geocoder
-arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=Gas+Station
+arcgis-explorer://?itemID=15c3a41bc01e4f8b9922736f3c194c29&search=Gas+Station
 
 // search for a feature from map. In this case, Hydrant #43141
 arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=43141

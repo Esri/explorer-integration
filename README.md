@@ -4,8 +4,8 @@ This is a multi-language repository that contains documentation and sample code 
 
 ## Supported versions
 
-* **iOS:** Explorer for ArcGIS 18.1.0
-* **Android:** Explorer for ArcGIS 18.1.0 Beta
+* **iOS:** Explorer for ArcGIS 18.1.0 or later
+* **Android:** Explorer for ArcGIS 18.1.0 or later [with limited support](#known-issues)
 
 ## What's included
 
@@ -139,6 +139,9 @@ arcgis-explorer://?itemID=15c3a41bc01e4f8b9922736f3c194c29&search=Gas+Station
 arcgis-explorer://?itemID=0c900ae2a1084d27b608233921ef1a84&search=43141
 ```
 
+#### Known Issues
+
+* Support on the Android version of Explorer for ArcGIS is limited to `itemID`, `center`/`scale`, and `rotation` parameters. Center parameter cannot reference feature from layer configured for search.
 
 #### Errors
 If an error is encountered when processing a URL scheme, the user will receive an alert.
